@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -74,6 +74,11 @@ namespace GitHub.Runner.Worker
                         {
                             // print out HostName for self-hosted runner
                             context.Output($"Runner name: '{setting.AgentName}'");
+                            VariableValue runnerGroupName = "";
+                            if (message.Variables.TryGetValue("RunnerGroupName", out runnerGroupName))
+                            {
+                              context.Output($"Runner group name: '{runnerGroupName}'");
+                            }
                             context.Output($"Machine name: '{Environment.MachineName}'");
                         }
                     }
